@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Tópico 3 - DIU de cobre como CE</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Gotu&family=Montserrat:wght@400;500;600;700;800&display=block" rel="stylesheet">
+<style>
+  :root{
+    --teal:#1597A8; --rose:#C98B80; --rose-l:#F3E3DF; --wine:#8E4A4E;
+    --red:#EE3B3B; --gray:#E8E8E8; --ink:#141414; --copper:#B8692E; --green:#2E9E6A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#888;font-family:'Gotu',serif;color:var(--ink)}
+  .slide{width:2000px;height:1125px;background:#fff;position:relative;overflow:hidden;margin:0 auto 40px;page-break-after:always;break-after:page}
+  /* moldura igual à do grupo */
+  .frame{position:absolute;inset:40px 34px 40px 34px;border:4px solid var(--teal);pointer-events:none}
+  .frame i{position:absolute;width:16px;height:16px;border:4px solid var(--teal);background:#fff}
+  .frame i:nth-child(1){left:-12px;top:-12px}.frame i:nth-child(2){right:-12px;top:-12px}
+  .frame i:nth-child(3){left:-12px;bottom:-12px}.frame i:nth-child(4){right:-12px;bottom:-12px}
+  .title{position:absolute;left:50%;transform:translateX(-50%);top:70px;background:var(--gray);padding:6px 70px 14px;
+    font-family:'Anton',sans-serif;font-size:66px;line-height:1.15;white-space:nowrap;color:#000}
+  .hl{color:var(--red)}
+  .src{position:absolute;left:80px;bottom:62px;font-family:'Montserrat',sans-serif;font-size:21px;color:#444}
+  .src b{font-weight:700}
+  ul.b{list-style:none}
+  ul.b li{position:relative;padding-left:34px;margin-bottom:18px;font-size:35px;line-height:1.6}
+  ul.b li:before{content:"";position:absolute;left:4px;top:24px;width:12px;height:12px;border-radius:50%;background:var(--ink)}
+  .pill{display:inline-block;background:var(--rose);color:#000;border-radius:40px;padding:10px 34px;font-size:34px}
+
+  /* ---------- Slide 1 ---------- */
+  #s1 .txt{position:absolute;left:100px;top:225px;width:1060px}
+  #s1 .svg{position:absolute;right:80px;top:180px;width:770px}
+  #s1 .badge{position:absolute;left:100px;bottom:105px;display:flex;gap:22px}
+  .chip{font-family:'Montserrat',sans-serif;font-weight:700;font-size:27px;padding:14px 26px;border-radius:16px;background:var(--rose-l);color:var(--wine);border:3px solid var(--rose)}
+
+  /* ---------- Slide 2: régua ---------- */
+  #s2 .ruler{position:absolute;left:90px;right:90px;top:240px}
+  .lane{display:grid;grid-template-columns:330px 1fr 250px;align-items:center;height:150px}
+  .lane .lbl{font-family:'Anton',sans-serif;font-size:40px;line-height:1.05}
+  .lane .lbl small{display:block;font-family:'Gotu';font-size:24px;color:#555;margin-top:6px}
+  .track{position:relative;height:74px;background:#F4F4F4;border-radius:40px}
+  .bar{position:absolute;left:0;top:0;bottom:0;border-radius:40px;display:flex;align-items:center;padding-left:30px;
+    font-family:'Montserrat',sans-serif;font-weight:700;font-size:26px;color:#fff;white-space:nowrap}
+  .fail{text-align:center;font-family:'Montserrat',sans-serif}
+  .fail b{display:block;font-size:46px;font-weight:800}
+  .fail span{font-size:21px;color:#555}
+  .axis{display:grid;grid-template-columns:330px 1fr 250px;margin-top:6px}
+  .ticks{position:relative;height:70px;border-top:4px solid #333}
+  .ticks span{position:absolute;top:8px;white-space:nowrap;transform:translateX(-50%);font-family:'Montserrat';font-weight:700;font-size:26px;text-align:center;line-height:1.15}
+  .ticks span small{display:block;font-weight:500;font-size:19px;color:#666}
+  .mark72{position:absolute;top:-500px;height:500px;border-left:4px dashed var(--red)}
+  .mark72 em{position:absolute;top:-6px;left:10px;font-style:normal;font-family:'Montserrat';font-weight:800;color:var(--red);font-size:24px;white-space:nowrap}
+  #s2 .ex{position:absolute;left:90px;right:90px;bottom:100px;background:var(--rose-l);border-left:12px solid var(--rose);border-radius:14px;padding:22px 34px;font-size:30px;line-height:1.55}
+
+  /* ---------- Slide 3: fluxograma ---------- */
+  #s3 .box{position:absolute;border-radius:22px;padding:16px 24px;font-size:29px;line-height:1.35;text-align:center;display:flex;align-items:center;justify-content:center}
+  #s3 .q{background:var(--gray);border:3px solid #bbb}
+  #s3 .start{background:var(--teal);color:#fff;font-family:'Montserrat';font-weight:700}
+  #s3 .ans{border:4px solid var(--rose);background:#fff}
+  #s3 .ans b{font-family:'Anton';font-weight:400;font-size:40px;display:block;margin-bottom:2px}
+  #s3 .diu{border-color:var(--copper);background:#FBEFE6}
+  #s3 .tag{position:absolute;font-family:'Montserrat';font-weight:800;font-size:26px;padding:4px 14px;border-radius:10px;color:#fff}
+  #s3 .case{position:absolute;right:80px;top:230px;width:520px;background:#fff;border:3px dashed var(--teal);border-radius:20px;padding:24px 28px;font-size:26px;line-height:1.5}
+  #s3 .case h4{font-family:'Anton';font-weight:400;font-size:36px;color:var(--teal);margin-bottom:8px}
+  #s3 .note{position:absolute;right:80px;width:520px;border-radius:18px;padding:18px 26px;font-size:25px;line-height:1.45}
+
+  /* ---------- Slide 4: contraindicações ---------- */
+  #s4 .col{position:absolute;top:225px;width:880px}
+  #s4 .head{border-radius:30px;padding:16px 30px;text-align:center;font-size:36px;margin-bottom:26px}
+  #s4 .no .head{background:var(--rose)}
+  #s4 .ok .head{background:#CFE9EC}
+  #s4 ul.b li{font-size:33px;margin-bottom:16px;line-height:1.5}
+  #s4 .ok li:before{background:var(--teal)}
+  #s4 .alert{position:absolute;left:95px;right:95px;bottom:110px;background:#FFF1F1;border:3px solid var(--red);border-radius:16px;padding:18px 30px;font-size:28px;line-height:1.5}
+
+  /* ---------- Slide 5 & 6: cards ---------- */
+  .grid{position:absolute;left:90px;right:90px;top:220px;bottom:95px;display:grid;gap:28px}
+  .card{background:#fff;border:3px solid #e2e2e2;border-radius:24px;padding:24px 28px 20px;position:relative;box-shadow:0 6px 0 #EFE4E1}
+  .card .n{position:absolute;top:-2px;left:-2px;width:76px;height:76px;border-radius:22px 0 22px 0;background:var(--rose);color:#fff;font-family:'Montserrat';font-weight:800;font-size:32px;display:flex;align-items:center;justify-content:center}
+  .card h3{font-family:'Anton';font-weight:400;font-size:44px;margin:0 0 14px 80px;line-height:1.2;min-height:56px}
+  .card p{font-size:31px;line-height:1.5}
+  .card .ref{display:block;margin-top:14px;font-family:'Montserrat';font-weight:700;font-size:23px;color:var(--teal)}
+
+  /* ---------- Slide 7: mito ou verdade ---------- */
+  #s7 .grid,#s8 .grid{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);gap:26px 36px}
+  .mv{display:flex;align-items:center;gap:26px;border-radius:24px;background:#FAFAFA;border:3px solid #e4e4e4;padding:18px 28px}
+  .mv .q{flex:1;font-size:33px;line-height:1.4}
+  .mv .q small{display:block;font-size:25px;color:#444;margin-top:6px;line-height:1.4}
+  .mv .tagmv{flex:none;width:170px;height:84px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-family:'Anton';font-size:36px;color:#fff;background:#bdbdbd}
+  .mito{background:var(--red)!important}.verd{background:var(--green)!important}
+  .mv.r-m{border-color:#F6B3B3;background:#FFF6F6}.mv.r-v{border-color:#A9DCC3;background:#F3FBF7}
+  .ask{position:absolute;left:0;right:0;bottom:56px;text-align:center;font-family:'Montserrat';font-weight:600;font-size:24px;color:#555}
+</style>
+</head>
+<body>
+
+<!-- =============== SLIDE 1 — DIU de cobre: o que é / como age =============== -->
+<section class="slide" id="s1">
+  <div class="frame"><i></i><i></i><i></i><i></i></div>
+  <div class="title">DIU de Cobre como Contracepção de Emergência</div>
+  <div class="txt">
+    <ul class="b">
+      <li><span class="hl">O que é:</span> pequeno “T” de plástico envolto por fio de cobre (TCu 380A), <u>disponível no SUS</u>.</li>
+      <li><span class="hl">Mecanismo:</span> o cobre gera uma reação inflamatória estéril no útero, tóxica para espermatozoides e óvulo → <b>impede a fecundação</b>.</li>
+      <li><span class="hl">Janela:</span> inserção até <b>5 dias (120 h)</b> após a relação desprotegida.</li>
+      <li><span class="hl">Eficácia:</span> &gt; 99% — <b>é a CE mais eficaz que existe</b>.</li>
+    </ul>
+  </div>
+  <div class="badge">
+    <span class="chip">Não sofre efeito do IMC</span>
+    <span class="chip">Sem interação com remédios</span>
+    <span class="chip">Protege por até 10 anos</span>
+  </div>
+  <svg class="svg" viewBox="0 0 720 720" xmlns="http://www.w3.org/2000/svg" font-family="Montserrat, sans-serif">
+    <defs>
+      <radialGradient id="ut" cx="50%" cy="35%" r="70%"><stop offset="0" stop-color="#F2A9A0"/><stop offset="1" stop-color="#D9776E"/></radialGradient>
+    </defs>
+    <circle cx="360" cy="330" r="330" fill="#F7ECE9"/>
+    <!-- trompas -->
+    <path d="M248 175 C190 140 120 120 92 170 C78 196 92 222 74 246" fill="none" stroke="#D9776E" stroke-width="22" stroke-linecap="round"/>
+    <path d="M472 175 C530 140 600 120 628 170 C642 196 628 222 646 246" fill="none" stroke="#D9776E" stroke-width="22" stroke-linecap="round"/>
+    <g stroke="#D9776E" stroke-width="8" stroke-linecap="round"><path d="M74 246 l-18 18M74 246 l-4 26M74 246 l14 22"/><path d="M646 246 l18 18M646 246 l4 26M646 246 l-14 22"/></g>
+    <ellipse cx="135" cy="262" rx="44" ry="28" fill="#F6D3B8" stroke="#E2B08F" stroke-width="4" transform="rotate(-20 135 262)"/>
+    <ellipse cx="585" cy="262" rx="44" ry="28" fill="#F6D3B8" stroke="#E2B08F" stroke-width="4" transform="rotate(20 585 262)"/>
+    <!-- útero -->
+    <path d="M238 165 C236 108 484 108 482 165 C492 280 440 395 405 455 L405 575 Q360 592 315 575 L315 455 C280 395 228 280 238 165 Z" fill="url(#ut)"/>
+    <!-- cavidade -->
+    <path d="M278 182 Q360 166 442 182 Q400 300 368 410 L352 410 Q320 300 278 182 Z" fill="#FBD9D3"/>
+    <!-- íons de cobre -->
+    <g fill="#E39A57" opacity=".9">
+      <circle cx="300" cy="215" r="7"/><circle cx="420" cy="220" r="7"/><circle cx="330" cy="275" r="6"/><circle cx="392" cy="268" r="6"/>
+      <circle cx="345" cy="335" r="6"/><circle cx="378" cy="318" r="5"/><circle cx="316" cy="240" r="5"/><circle cx="406" cy="245" r="5"/><circle cx="360" cy="385" r="5"/>
+    </g>
+    <!-- DIU em T -->
+    <path d="M292 200 Q360 190 428 200" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round"/>
+    <circle cx="292" cy="200" r="9" fill="#fff"/><circle cx="428" cy="200" r="9" fill="#fff"/>
+    <line x1="360" y1="195" x2="360" y2="380" stroke="#fff" stroke-width="12" stroke-linecap="round"/>
+    <path d="M352 222 l16 8 l-16 8 l16 8 l-16 8 l16 8 l-16 8 l16 8 l-16 8 l16 8 l-16 8 l16 8 l-16 8 l16 8 l-16 8 l16 8 l-16 8 l16 8" fill="none" stroke="#B8692E" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M360 382 C356 450 366 520 358 640" fill="none" stroke="#5a5a5a" stroke-width="3"/>
+    <!-- espermatozoides barrados -->
+    <g transform="translate(300 660) rotate(-70)"><ellipse cx="0" cy="0" rx="11" ry="7" fill="#7A8FA6"/><path d="M-11 0 q-12 -8 -24 0 t-24 0" fill="none" stroke="#7A8FA6" stroke-width="3"/></g>
+    <g transform="translate(410 668) rotate(-110)"><ellipse cx="0" cy="0" rx="11" ry="7" fill="#7A8FA6"/><path d="M-11 0 q-12 -8 -24 0 t-24 0" fill="none" stroke="#7A8FA6" stroke-width="3"/></g>
+    <g transform="translate(356 618) rotate(-90)"><ellipse cx="0" cy="0" rx="11" ry="7" fill="#7A8FA6"/><path d="M-11 0 q-12 -8 -24 0 t-24 0" fill="none" stroke="#7A8FA6" stroke-width="3"/></g>
+    <circle cx="356" cy="612" r="30" fill="none" stroke="#EE3B3B" stroke-width="6"/><line x1="335" y1="591" x2="377" y2="633" stroke="#EE3B3B" stroke-width="6"/>
+    <!-- rótulos -->
+    <g font-size="21" font-weight="700" fill="#141414">
+      <line x1="428" y1="200" x2="560" y2="110" stroke="#141414" stroke-width="2"/>
+      <rect x="520" y="70" width="190" height="40" rx="8" fill="#3d3d3d"/><text x="615" y="97" text-anchor="middle" fill="#fff">DIU em “T”</text>
+      <line x1="368" y1="300" x2="560" y2="380" stroke="#141414" stroke-width="2"/>
+      <rect x="520" y="380" width="190" height="66" rx="8" fill="#B8692E"/><text x="615" y="408" text-anchor="middle" fill="#fff">Fio de cobre</text><text x="615" y="434" text-anchor="middle" fill="#fff" font-size="17" font-weight="500">libera íons Cu²⁺</text>
+      <line x1="300" y1="215" x2="120" y2="380" stroke="#141414" stroke-width="2"/>
+      <rect x="10" y="380" width="220" height="66" rx="8" fill="#3d3d3d"/><text x="120" y="408" text-anchor="middle" fill="#fff">Inflamação estéril</text><text x="120" y="434" text-anchor="middle" fill="#fff" font-size="17" font-weight="500">ambiente hostil</text>
+      <line x1="330" y1="620" x2="200" y2="560" stroke="#141414" stroke-width="2"/>
+      <rect x="10" y="520" width="220" height="66" rx="8" fill="#EE3B3B"/><text x="120" y="548" text-anchor="middle" fill="#fff">Espermatozoides</text><text x="120" y="574" text-anchor="middle" fill="#fff" font-size="17" font-weight="500">perdem a função</text>
+    </g>
+  </svg>
+  <div class="src"><b>Fonte:</b> OMS (2021); FEBRASGO – Manual de Anticoncepção; Cleland et al., Hum Reprod (2012).</div>
+</section>
+
+<!-- =============== SLIDE 2 — Régua das 120 horas =============== -->
+<section class="slide" id="s2">
+  <div class="frame"><i></i><i></i><i></i><i></i></div>
+  <div class="title">A “Régua das 120 horas”</div>
+  <div class="ruler">
+    <div class="lane" style="font-family:'Montserrat';font-weight:700;font-size:22px;color:#777;height:50px">
+      <div></div><div>Tempo desde a relação desprotegida →</div><div style="text-align:center">Gravidez mesmo usando*</div>
+    </div>
+    <div class="lane">
+      <div class="lbl">Levonorgestrel<small>pílula 1,5 mg · SUS</small></div>
+      <div class="track"><div class="bar" style="width:100%;background:linear-gradient(90deg,#2E9E6A 0%,#7CB342 45%,#F2B84B 60%,#E57373 100%)">quanto antes, melhor · eficácia cai com o tempo</div></div>
+      <div class="fail"><b style="color:#E57373">≈ 2 / 100</b><span>mulheres</span></div>
+    </div>
+    <div class="lane">
+      <div class="lbl">Ulipristal<small>pílula 30 mg</small></div>
+      <div class="track"><div class="bar" style="width:100%;background:#1597A8">eficácia estável até 120 h</div></div>
+      <div class="fail"><b style="color:#1597A8">≈ 1,5 / 100</b><span>mulheres</span></div>
+    </div>
+    <div class="lane">
+      <div class="lbl">DIU de cobre<small>inserção · SUS</small></div>
+      <div class="track" style="overflow:visible"><div class="bar" style="width:100%;background:#B8692E">&gt; 99% eficaz durante toda a janela</div>
+        <div style="position:absolute;left:100%;top:50%;transform:translateY(-50%);margin-left:6px;font-family:'Montserrat';font-weight:800;color:#B8692E;font-size:22px;white-space:nowrap"></div></div>
+      <div class="fail"><b style="color:#B8692E">&lt; 1 / 1000</b><span>mulheres</span></div>
+    </div>
+    <div class="axis">
+      <div></div>
+      <div class="ticks">
+        <div class="mark72" style="left:60%"><em>72 h</em></div>
+        <span style="left:0">0 h</span>
+        <span style="left:20%">24 h<small>dia 1</small></span>
+        <span style="left:40%">48 h<small>dia 2</small></span>
+        <span style="left:60%">72 h<small>dia 3</small></span>
+        <span style="left:80%">96 h<small>dia 4</small></span>
+        <span style="left:100%">120 h<small>dia 5</small></span>
+      </div>
+      <div></div>
+    </div>
+  </div>
+  <div class="ex">
+    <b>Exemplo prático:</b> a camisinha rompeu no <b>sábado às 22h</b>.
+    Levonorgestrel: tomar <span class="hl">o quanto antes</span> (ideal até <b>terça 22h</b>).
+    DIU de cobre ou ulipristal: ainda funcionam até <b>quinta-feira 22h</b>.
+  </div>
+  <div class="src" style="bottom:52px;font-size:18px">*Taxas aproximadas. Glasier et al., Lancet (2010); Cleland et al., Hum Reprod (2012); OMS (2021).</div>
+</section>
+
+<!-- =============== SLIDE 3 — Fluxograma: qual CE escolher? =============== -->
+<section class="slide" id="s3">
+  <div class="frame"><i></i><i></i><i></i><i></i></div>
+  <div class="title">Na prática: qual CE escolher?</div>
+  <svg style="position:absolute;left:0;top:0" width="2000" height="1125">
+    <defs><marker id="ar" markerUnits="userSpaceOnUse" markerWidth="24" markerHeight="24" refX="20" refY="12" orient="auto"><path d="M0,0 L24,12 L0,24 z" fill="#555"/></marker></defs>
+    <g stroke="#555" stroke-width="4" fill="none" marker-end="url(#ar)">
+      <line x1="430" y1="330" x2="430" y2="378"/>
+      <line x1="730" y1="455" x2="905" y2="455"/>
+      <line x1="430" y1="535" x2="430" y2="598"/>
+      <path d="M300 760 L300 790 L285 790 L285 818"/>
+      <path d="M560 760 L560 790 L700 790 L700 818"/>
+    </g>
+  </svg>
+  <div class="box start" style="left:130px;top:215px;width:600px;height:120px;font-size:27px"><div>Relação desprotegida / falha do método<br>há até 5 dias (120 h)</div></div>
+  <div class="box q" style="left:130px;top:380px;width:600px;height:155px"><div>Quer um método de longa duração<br>e <b>não tem contraindicação</b> ao DIU?</div></div>
+  <span class="tag" style="left:770px;top:400px;background:#2E9E6A">SIM</span>
+  <span class="tag" style="left:450px;top:550px;background:#EE3B3B">NÃO</span>
+  <div class="box ans diu" style="left:910px;top:357px;width:430px;height:200px"><div><b style="color:#B8692E">DIU de cobre</b>1ª escolha · &gt; 99%<br>já fica como método</div></div>
+  <div class="box q" style="left:130px;top:600px;width:600px;height:160px"><div>Então, pílula: <b>há quanto tempo</b><br>foi a relação?</div></div>
+  <div class="box ans" style="left:90px;top:822px;width:390px;height:195px"><div><b>até 72 h</b>Levonorgestrel 1,5 mg<br>dose única (SUS)</div></div>
+  <div class="box ans" style="left:505px;top:822px;width:440px;height:195px"><div><b>72 – 120 h</b>Ulipristal 30 mg*<br>ou LNG o quanto antes</div></div>
+
+  <div class="case">
+    <h4>Caso: Júlia, 24 anos</h4>
+    Camisinha rompeu há <b>4 dias</b>. IMC = 32. Diz: <i>“queria algo pra não me preocupar mais”</i>.<br>
+    <span style="display:block;margin-top:10px;color:#B8692E;font-weight:700">→ Melhor opção: DIU de cobre</span>
+    <span style="font-size:22px;color:#555">Está no 4º dia (fora do ideal do LNG), IMC alto reduz o LNG e ela quer método contínuo.</span>
+  </div>
+  <div class="note" style="top:720px;background:#FFF1F1;border:3px solid #EE3B3B"><b class="hl">IMC ≥ 30:</b> o levonorgestrel perde eficácia → preferir <b>DIU de cobre</b> ou ulipristal.</div>
+  <div class="note" style="top:900px;background:#E8F5F7;border:3px solid #1597A8"><b style="color:#1597A8">E depois da pílula?</b> Iniciar um método regular + preservativo.</div>
+  <div class="src" style="bottom:52px;left:1000px;font-size:18px">*Ulipristal: pouco disponível no Brasil e não ofertado no SUS.</div>
+</section>
+
+<!-- =============== SLIDE 4 — Contraindicações e mitos =============== -->
+<section class="slide" id="s4">
+  <div class="frame"><i></i><i></i><i></i><i></i></div>
+  <div class="title">DIU como CE: quando NÃO colocar?</div>
+  <div class="col no" style="left:95px">
+    <div class="head">🚫 Contraindicações</div>
+    <ul class="b">
+      <li><span class="hl">Gravidez</span> confirmada ou suspeita (relação anterior);</li>
+      <li><span class="hl">IST/DIP ativa</span> (cervicite purulenta, clamídia, gonorreia);</li>
+      <li>Sangramento vaginal <span class="hl">sem explicação</span>;</li>
+      <li>Cavidade uterina distorcida (malformações, miomas submucosos);</li>
+      <li>Câncer de colo ou de endométrio; doença trofoblástica;</li>
+      <li>Alergia ao cobre ou doença de Wilson.</li>
+    </ul>
+  </div>
+  <div class="col ok" style="left:1025px">
+    <div class="head">✅ NÃO são contraindicações</div>
+    <ul class="b">
+      <li><b>Nunca ter tido filhos</b> (nuliparidade);</li>
+      <li><b>Adolescência</b> — DIU é seguro em jovens;</li>
+      <li>Ter usado <b>CE antes</b> no mesmo ciclo;</li>
+      <li>IMC elevado ou uso de anticonvulsivantes (o DIU não depende de hormônio).</li>
+    </ul>
+  </div>
+  <div class="alert">⚠️ <b>Violência sexual:</b> a norma técnica do Ministério da Saúde prioriza o <b>levonorgestrel</b>, pelo risco de IST na inserção do DIU nesse contexto.</div>
+  <div class="src" style="bottom:52px;font-size:18px"><b>Fonte:</b> OMS – Critérios Médicos de Elegibilidade (2015); Ministério da Saúde – Norma Técnica de Violência Sexual (2012).</div>
+</section>
+
+<!-- =============== SLIDE 5 — Aspectos clínicos =============== -->
+<section class="slide" id="s5">
+  <div class="frame"><i></i><i></i><i></i><i></i></div>
+  <div class="title">Aspectos clínicos da CE</div>
+  <div class="grid" style="grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr">
+    <div class="card"><span class="n">1</span><h3>Sem burocracia</h3><p>Para a pílula, <b>não precisa</b> de exame físico nem de teste de gravidez: basta a história clínica.</p></div>
+    <div class="card"><span class="n">2</span><h3>Pode repetir?</h3><p>Sim, até no mesmo ciclo — é segura. Mas <span class="hl">não substitui</span> um método regular (menos eficaz e desregula o ciclo).</p></div>
+    <div class="card"><span class="n">3</span><h3>Depois do LNG</h3><p>Iniciar ou retomar o método regular <b>no mesmo dia</b> + preservativo por 7 dias.</p></div>
+    <div class="card"><span class="n">4</span><h3>Depois do ulipristal</h3><p>Esperar <b>5 dias</b> para começar hormônio (o progestágeno “anula” o UPA) e usar barreira.</p></div>
+    <div class="card"><span class="n">5</span><h3>Menstruação</h3><p>Pode adiantar ou atrasar. <span class="hl">Atraso &gt; 7 dias</span> → fazer teste de gravidez.</p></div>
+    <div class="card"><span class="n">6</span><h3>E as ISTs?</h3><p>CE <b>não protege</b> contra IST. Avaliar risco, orientar preservativo e, se indicado, PEP.</p></div>
+  </div>
+  <div class="src" style="bottom:52px;font-size:18px"><b>Fonte:</b> OMS (2021); FSRH – Emergency Contraception Guideline (2023); FEBRASGO.</div>
+</section>
+
+<!-- =============== SLIDE 6 — Aspectos éticos e legais =============== -->
+<section class="slide" id="s6">
+  <div class="frame"><i></i><i></i><i></i><i></i></div>
+  <div class="title">Aspectos éticos e legais da CE</div>
+  <div class="grid" style="grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr">
+    <div class="card"><span class="n">⚖</span><h3>Autonomia</h3><p>É vedado ao médico desrespeitar o direito da paciente de <b>decidir livremente</b> sobre o método contraceptivo — e ele deve esclarecer riscos e benefícios.<span class="ref">Código de Ética Médica, art. 42 · Lei 9.263/96</span></p></div>
+    <div class="card"><span class="n">🔒</span><h3>Adolescentes</h3><p>Têm direito a atendimento e <b>sigilo</b>, sem obrigatoriedade dos pais. <span class="hl">Exceção:</span> menor de 14 anos = estupro de vulnerável → notificar e acionar o Conselho Tutelar.<span class="ref">ECA · CEM, art. 74 · Código Penal, art. 217-A</span></p></div>
+    <div class="card"><span class="n">🛡</span><h3>Violência sexual</h3><p>Atendimento <b>imediato e integral</b>, incluindo a prevenção da gravidez. <span class="hl">Não exige boletim de ocorrência.</span> Notificação compulsória.<span class="ref">Lei 12.845/2013 (Lei do Minuto Seguinte) · Lei 10.778/2003</span></p></div>
+    <div class="card"><span class="n">🤝</span><h3>Objeção de consciência</h3><p>O médico pode recusar por convicção, mas <b>deve garantir o encaminhamento</b> — e não pode recusar em urgência ou sem outro profissional. Lembrar: <b>CE não é aborto</b>.<span class="ref">Código de Ética Médica, cap. I (VII) e cap. II (IX)</span></p></div>
+  </div>
+</section>
+
+<!-- =============== SLIDE 7 — Mito ou verdade (perguntas) =============== -->
+<section class="slide" id="s7">
+  <div class="frame"><i></i><i></i><i></i><i></i></div>
+  <div class="title">Mito ou Verdade?</div>
+  <div class="grid">
+    <div class="mv"><div class="q">1. Quem nunca teve filhos não pode usar DIU.</div><div class="tagmv">?</div></div>
+    <div class="mv"><div class="q">2. O DIU de cobre é a CE mais eficaz.</div><div class="tagmv">?</div></div>
+    <div class="mv"><div class="q">3. Adolescente só recebe CE acompanhada dos pais.</div><div class="tagmv">?</div></div>
+    <div class="mv"><div class="q">4. Vítima de violência sexual precisa de B.O. para receber a CE.</div><div class="tagmv">?</div></div>
+    <div class="mv"><div class="q">5. A contracepção de emergência protege contra ISTs.</div><div class="tagmv">?</div></div>
+    <div class="mv"><div class="q">6. O DIU colocado como CE pode ficar por até 10 anos.</div><div class="tagmv">?</div></div>
+  </div>
+  <div class="ask">Levante a mão quem acha que é MITO 🙋</div>
+</section>
+
+<!-- =============== SLIDE 8 — Mito ou verdade (respostas) =============== -->
+<section class="slide" id="s8">
+  <div class="frame"><i></i><i></i><i></i><i></i></div>
+  <div class="title">Mito ou Verdade?</div>
+  <div class="grid">
+    <div class="mv r-m"><div class="q">1. Quem nunca teve filhos não pode usar DIU.<small>Nuliparidade não é contraindicação.</small></div><div class="tagmv mito">MITO</div></div>
+    <div class="mv r-v"><div class="q">2. O DIU de cobre é a CE mais eficaz.<small>&gt; 99%, até 120 h, sem efeito do IMC.</small></div><div class="tagmv verd">VERDADE</div></div>
+    <div class="mv r-m"><div class="q">3. Adolescente só recebe CE acompanhada dos pais.<small>Direito a atendimento e sigilo (ECA / CEM).</small></div><div class="tagmv mito">MITO</div></div>
+    <div class="mv r-m"><div class="q">4. Vítima de violência sexual precisa de B.O. para receber a CE.<small>Lei 12.845/2013: atendimento sem B.O.</small></div><div class="tagmv mito">MITO</div></div>
+    <div class="mv r-m"><div class="q">5. A contracepção de emergência protege contra ISTs.<small>Só previne gravidez → preservativo / PEP.</small></div><div class="tagmv mito">MITO</div></div>
+    <div class="mv r-v"><div class="q">6. O DIU colocado como CE pode ficar por até 10 anos.<small>Vira o método contraceptivo regular.</small></div><div class="tagmv verd">VERDADE</div></div>
+  </div>
+</section>
+
+</body>
+</html>
